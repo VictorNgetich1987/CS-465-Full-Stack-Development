@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { TripCardComponent } from '../trip-card/trip-card.component';
 import { TripDataService } from '../services/trip-data.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-trip-listing',
@@ -12,14 +13,14 @@ import { TripDataService } from '../services/trip-data.service';
   styleUrl: './trip-listing.component.css'
 })
 export class TripListingComponent implements OnInit {
-
   trips: any[] = [];
   message: string = '';
 
   constructor(
     private tripDataService: TripDataService,
     private router: Router,
-    private cdr: ChangeDetectorRef  // ← ADD THIS
+    private cdr: ChangeDetectorRef,
+    private authenticationService: AuthenticationService
   ) {
     console.log('trip-listing constructor');
   }
@@ -28,7 +29,7 @@ export class TripListingComponent implements OnInit {
     this.tripDataService.getTrips().subscribe({
       next: (data: any) => {
         this.trips = Array.isArray(data) ? data : [data];
-        this.cdr.detectChanges();  // ← ADD THIS
+        this.cdr.detectChanges();
         console.log('Trips set:', this.trips.length);
       },
       error: (error: any) => {
@@ -39,5 +40,9 @@ export class TripListingComponent implements OnInit {
 
   public addTrip(): void {
     this.router.navigate(['add-trip']);
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 }

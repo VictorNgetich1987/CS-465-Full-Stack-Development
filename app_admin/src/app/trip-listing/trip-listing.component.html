@@ -1,7 +1,6 @@
 <div>
-  <button class="btn btn-info" [routerLink]="['/add-trip']">Add Trip</button>
+  <button *ngIf="isLoggedIn()" class="btn btn-info" [routerLink]="['/add-trip']">Add Trip</button>
 </div>
-
 <div class="row">
   <div *ngFor="let trip of trips" class="col-md-4">
     <app-trip-card [trip]="trip"></app-trip-card>
