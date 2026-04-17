@@ -26,6 +26,10 @@ export class TripListingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTrips(); // ← call the method here
+  }
+
+  public getTrips(): void {  // ← moved OUTSIDE ngOnInit
     this.tripDataService.getTrips().subscribe({
       next: (data: any) => {
         this.trips = Array.isArray(data) ? data : [data];

@@ -1,3 +1,4 @@
+
 [
   {
     "code": "GALR210214",
@@ -28,5 +29,15 @@
     "perPerson": "1999.00",
     "image": "reef3.jpg",
     "description": "<p>Claire's Reef Donec sed felis risus. Nulla facilisi. Do"
+  },
+  {
+    "code": "MEGR220119",
+    "name": "Mega Reef",
+    "length": "4 nights / 5 days",
+    "start": "2022-01-19T08:00:00Z",
+    "resort": "Utopia Resort & Spa, 5 stars",
+    "perPerson": "2399.00",
+    "image": "reef1.jpg",
+    "description": "<p>Mega Reef The ultimate diving experience in crystal clear waters with vibrant coral and exotic marine life."
   }
 ]

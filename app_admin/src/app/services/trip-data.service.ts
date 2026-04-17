@@ -34,6 +34,9 @@ export class TripDataService {
   updateTrip(formData: Trip): Observable<Trip> {
     return this.http.put<Trip>(this.url + '/' + formData.code, formData);
   }
+  deleteTrip(tripCode: string): Observable<any> {
+  return this.http.delete(this.url + '/' + tripCode);
+}
 
   login(user: User, passwd: string): Observable<AuthResponse> {
     return this.handleAuthAPICall('login', user, passwd);

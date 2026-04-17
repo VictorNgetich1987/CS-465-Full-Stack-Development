@@ -1,58 +1,71 @@
 const mongoose = require('mongoose');
-const Trip = require('../models/travlr'); // Register model
+const Trip = require('../models/travlr');
 const Model = mongoose.model('trips');
 
-// GET: /trips - lists all the trips
 const tripsList = async (req, res) => {
-    const q = await Model
-        .find({})
-        .exec();
-    if (!q) {
-        return res.status(404).json(err);
-    } else {
+    try {
+        const q = await Model.find({}).exec();
+        if (!q) return res.status(404).json({ message: 'No trips found' });
         return res.status(200).json(q);
+    } catch (err) {
+        return res.status(500).json(err);
     }
 };
 
-// GET: /trips/:tripCode - lists a single trip
 const tripsFindByCode = async (req, res) => {
-    const q = await Model
-        .find({ 'code': req.params.tripCode })
-        .exec();
-    if (!q) {
-        return res.status(404).json(err);
-    } else {
+    try {
+        const q = await Model.find({ 'code': req.params.tripCode }).exec();
+        if (!q) return res.status(404).json({ message: 'Trip not found' });
         return res.status(200).json(q);
+    } catch (err) {
+        return res.status(500).json(err);
     }
 };
 
-// POST: /trips - Adds a new Trip
 const tripsAddTrip = async (req, res) => {
-    const newTrip = new Trip({
-        code: req.body.code,
-        name: req.body.name,
-        length: req.body.length,
-        start: req.body.start,
-        resort: req.body.resort,
-        perPerson: req.body.perPerson,
-        image: req.body.image,
-        description: req.body.description
-    });
-    const q = await newTrip.save();
-    if (!q) {
-        return res.status(400).json(err);
-    } else {
+    try {
+        const newTrip = new Trip({
+            code: req.body.code,
+            name: req.body.name,
+            length: req.body.length,
+            start: req.body.start,
+            resort: req.body.resort,
+            perPerson: req.body.perPerson,
+            image: req.body.image,
+            description: req.body.description
+        });
+        const q = await newTrip.save();
+        if (!q) return res.status(400).json({ message: 'Failed to add trip' });
         return res.status(201).json(q);
+    } catch (err) {
+        return res.status(500).json(err);
+    }
+};
+const tripsDeleteTrip = async (req, res) => {
+    try {
+        const q = await Model.findOneAndDelete({ code: req.params.tripCode }).exec();
+        if (!q) return res.status(404).json({ message: 'Trip not found' });
+        return res.status(200).json({ message: 'Trip deleted successfully' });
+    } catch (err) {
+        return res.status(500).json(err);
     }
 };
 
-// PUT: /trips/:tripCode - Updates a Trip
 const tripsUpdateTrip = async (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
-    const q = await Model
-        .findOneAndUpdate(
-            { 'code': req.params.tripCode },
+    try {
+        console.log('params:', req.params);
+        console.log('body:', req.body);
+        
+        // First check if trip exists
+        const existing = await Model.findOne({ code: req.params.tripCode }).exec();
+        console.log('existing trip:', existing);
+        
+        if (!existing) {
+            return res.status(404).json({ message: 'Trip not found: ' + req.params.tripCode });
+        }
+
+        const q = await Model.findOneAndUpdate(
+            { code: req.params.tripCode },
             {
                 code: req.body.code,
                 name: req.body.name,
@@ -62,19 +75,16 @@ const tripsUpdateTrip = async (req, res) => {
                 perPerson: req.body.perPerson,
                 image: req.body.image,
                 description: req.body.description
-            }
-        )
-        .exec();
-    if (!q) {
-        return res.status(400).json(err);
-    } else {
+            },
+            { new: true, runValidators: true }
+        ).exec();
+
+        console.log('update result:', q);
         return res.status(201).json(q);
+    } catch (err) {
+        console.log('error:', err);
+        return res.status(500).json({ message: err.message });
     }
 };
 
-module.exports = {
-    tripsList,
-    tripsFindByCode,
-    tripsAddTrip,
-    tripsUpdateTrip  // ← Added
-};
+module.exports = { tripsList, tripsFindByCode, tripsAddTrip, tripsUpdateTrip, tripsDeleteTrip };
