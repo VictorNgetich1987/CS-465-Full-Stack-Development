@@ -39,7 +39,7 @@ PUT /api/trips/:tripCode — Update an existing trip (write)
 Testing these endpoints means verifying that each returns the correct HTTP status code (200 OK, 201 Created, 404 Not Found, 401 Unauthorized, etc.), the expected response payload structure, and appropriate error handling for malformed requests.
 Security and Authentication Complexity:
 Adding JWT (JSON Web Token) authentication introduced significant testing complexity. Endpoints that require authentication must be tested in two states: once without a valid token (expecting a 401 Unauthorized response) and once with a valid token (expecting the successful response). This doubles the number of test cases for every protected route.
-Testing the login flow itself requires verifying that valid credentials return a JWT, that invalid credentials are rejected, and that the token is correctly validated on subsequent requests. Tools like Postman were invaluable for manually testing API endpoints — allowing headers like Authorization: Bearer <token> to be set per-request to simulate authenticated sessions. In a more mature testing setup, automated integration tests using a framework like Jest or Mocha would mock authentication middleware to isolate endpoint logic from security logic during unit testing.
+Testing the login flow itself requires verifying that valid credentials return a JWT, that invalid credentials are rejected, and that the token is correctly validated on subsequent requests. Tools like Postman were invaluable for manually testing API endpoints,allowing headers like Authorization: Bearer <token> to be set per-request to simulate authenticated sessions. In a more mature testing setup, automated integration tests using a framework like Jest or Mocha would mock authentication middleware to isolate endpoint logic from security logic during unit testing.
 
 Reflection
 Professional Growth and Marketable Skills
@@ -48,8 +48,8 @@ Several skills stand out as particularly marketable:
 
 Full Stack Thinking: I can now reason about how changes in one layer (e.g., a schema change in MongoDB) ripple through the API contract and into the frontend. This end-to-end perspective is highly valued in smaller teams where developers are expected to work across the stack.
 RESTful API Design: Designing and implementing a REST API with proper HTTP semantics, JSON data exchange, and route structure is a foundational skill for virtually any web development role.
-Security Implementation: Implementing JWT-based authentication — including password hashing with bcrypt, token generation, and protected route middleware — gave me practical experience with authentication patterns that are standard in production applications.
+Security Implementation: Implementing JWT-based authentication, including password hashing with bcrypt, token generation, and protected route middleware,gave me practical experience with authentication patterns that are standard in production applications.
 Angular and Component Architecture: Building a SPA with Angular reinforced component-based thinking, which transfers directly to other modern frameworks like React and Vue.
 Version Control with Git/GitHub: Maintaining a repository throughout the project, using it to track progress and produce a professional portfolio artifact, prepared me for collaborative development workflows in a professional environment.
 
-This course moved me from understanding web concepts theoretically to implementing them in a working, multi-layered application — a transition that is essential for entering the workforce as a competent full stack developer.
+This course moved me from understanding web concepts theoretically to implementing them in a working, multi-layered application, a transition that is essential for entering the workforce as a competent full stack developer.
