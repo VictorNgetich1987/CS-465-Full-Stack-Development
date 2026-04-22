@@ -43,7 +43,7 @@ Testing the login flow itself requires verifying that valid credentials return a
 
 Reflection
 Professional Growth and Marketable Skills
-This course has significantly advanced my readiness for a career in software development, particularly in web application roles. Working through the full MEAN stack — MongoDB, Express, Angular, and Node.js — gave me hands-on experience with the entire lifecycle of a modern web application, from database design to REST API development to a dynamic client-side SPA.
+This course has significantly advanced my readiness for a career in software development, particularly in web application roles. Working through the full MEAN stack — MongoDB, Express, Angular, and Node.js gave me hands-on experience with the entire lifecycle of a modern web application, from database design to REST API development to a dynamic client-side SPA.
 Several skills stand out as particularly marketable:
 
 Full Stack Thinking: I can now reason about how changes in one layer (e.g., a schema change in MongoDB) ripple through the API contract and into the frontend. This end-to-end perspective is highly valued in smaller teams where developers are expected to work across the stack.
